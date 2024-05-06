@@ -1,0 +1,56 @@
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="numOpportunite">
+        <th mat-header-cell *matHeaderCellDef> Numéro d'opportunité </th>
+        <td mat-cell *matCellDef="let element"> {{element.numOpportunite}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="refDossier">
+        <th mat-header-cell *matHeaderCellDef> Référence du dossier </th>
+        <td mat-cell *matCellDef="let element"> {{element.refDossier}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="siren">
+        <th mat-header-cell *matHeaderCellDef> Numéro SIRET SIREN </th>
+        <td mat-cell *matCellDef="let element"> {{element.siren}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomClient">
+        <th mat-header-cell *matHeaderCellDef> Nom du client </th>
+        <td mat-cell *matCellDef="let element"> {{element.nomClient}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tarif">
+        <th mat-header-cell *matHeaderCellDef> Coût de l'opération (tarif) </th>
+        <td mat-cell *matCellDef="let element"> {{element.tarif}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="adresse">
+        <th mat-header-cell *matHeaderCellDef> Adresse de l'opération </th>
+        <td mat-cell *matCellDef="let element"> {{element.adresse}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pdf">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-button (click)="getPdf(element)">
+                <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+        </td>
+
+
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+</table>

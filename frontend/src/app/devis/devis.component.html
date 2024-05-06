@@ -1,0 +1,120 @@
+<mat-stepper #stepper>
+    <mat-step [stepControl]="informationsGeneralesForm">
+        <form [formGroup]="informationsGeneralesForm" style="margin-top: 20px;">
+            <ng-template matStepLabel>Informations générales</ng-template>
+            <div class="formDiv">
+            <mat-form-field>
+                <mat-label>Numéro d'opportunité</mat-label>
+                <input matInput placeholder="Numéro d'opportunité" formControlName="numOpportunite" required>
+            </mat-form-field>
+           
+</div>
+ @if(informationsGeneralesForm.controls.numOpportunite.valid) {
+<div class="formDiv">
+            <mat-form-field>
+                <mat-label>Référence du dossier</mat-label>
+                <input matInput placeholder="Référence du dossier" formControlName="refDossier" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Numéro SIRET SIREN</mat-label>
+                <input matInput placeholder="Numéro SIRET SIREN" formControlName="siren" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Affaire</mat-label>
+                <input matInput placeholder="Affaire" formControlName="affaire" required>
+            </mat-form-field>
+</div>
+<div class="formDiv">
+            <mat-form-field>
+                <mat-label>Nom du client</mat-label>
+                <input matInput placeholder="Nom du client" formControlName="nomClient" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Intermédiaire</mat-label>
+                <input matInput placeholder="Intermédiaire (Nom + Code portefeuille)" formControlName="intermediaire"
+                    required>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Description succincte</mat-label>
+                <textarea matInput
+                    cdkTextareaAutosize
+                    formControlName="description" 
+                    required
+                    placeholder="Description succincte"
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5">
+                </textarea>
+            </mat-form-field>
+</div>
+            }
+        <div class="lienFichier">
+            <div>
+                <mat-label>Image en lien avec la description</mat-label>
+                <input type="file" #filePicker formControlName="image"  (change)="onImagePicked($event)">
+            
+                <mat-label style="margin-left: 10px;">Présence d'une coassurance</mat-label>
+                <mat-slide-toggle formControlName="presenceCoassurance"></mat-slide-toggle>
+            </div>
+        </div>
+
+            <div class="navigation">
+                <button mat-button matStepperNext style="color: blue">Next</button>
+            </div>
+
+            
+        </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="CaracteristiquesTechniquesForm" >
+        <form [formGroup]="CaracteristiquesTechniquesForm"  style="margin-top: 20px;">
+            <ng-template matStepLabel >Caractéristiques techniques</ng-template>
+            <div class="formDiv">
+            <mat-form-field>
+                <mat-label>Adresse de l'opération</mat-label>
+                <input matInput formControlName="adresse" placeholder="Adresse de l'opération" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Descriptif détaillé de l'opération</mat-label>
+                <input matInput formControlName="descriptifDetaille" placeholder="Descriptif détaillé de l'opération"
+                    required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Coût de l'opération (tarif)</mat-label>
+                <input matInput formControlName="tarif" placeholder="Coût de l'opération (tarif)" required>
+            </mat-form-field>
+            </div>
+            <div class="lienFichier">
+                <div>
+                    <mat-label>Plan de l'adresse de l'opération</mat-label>
+                    <input type="file" #filePicker multiple="true" formControlName="planImage"
+                        (change)="onImagePicked($event)">
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button mat-button matStepperPrevious style="color: red">Back</button>
+                <button mat-button matStepperNext type="submit" (click)="submit()" style="color: green">Valide</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel style="margin-bottom: 20px;">Done</ng-template>
+        <div class="lienFichier">
+            <div>
+                <button mat-button (click)="generatePdforDoc('docx')">Projet de contrat Doc</button>
+                <button mat-button (click)="generatePdforDoc('pdf')">Projet de contrat PDF</button>
+            </div>
+        </div>
+        <div class="navigation">
+            <button mat-button matStepperPrevious style="color: red">Back</button>
+        </div>
+    </mat-step>
+</mat-stepper>

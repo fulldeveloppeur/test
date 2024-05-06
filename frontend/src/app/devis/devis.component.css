@@ -1,0 +1,27 @@
+.formDiv {
+    display: ruby-text;
+}
+
+#description {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.lienFichier {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.navigation {
+    display: ruby-text;
+}
+
+mat-form-field {
+    margin-right: 10px;
+}
+
+mat-label {
+    margin-right: 5px;
+}
